@@ -59,13 +59,13 @@ struct AsyncLetTut: View {
                         async let fetchImage4 = fetchImage()
                         
                         // Using await only once instead of using it 4 times as above:
-                        let (image1, image2, image3, image4) = await (try fetchImage1, try fetchImage1, try fetchImage3, try fetchImage4)
+                        let (image1, image2, image3, image4) = await (try fetchImage1, try fetchImage2, try fetchImage3, try fetchImage4)
                         self.images.append(contentsOf: [image1, image2, image3, image4])
                         
                         async let fetchImage5 = fetchImage()
                         async let fetchTitle1 = fetchTitle()
                         
-                        let (image5, title1) = await (try fetchImage5, fetchTitle1)
+//                        let (image5, title1) = await (try fetchImage5, fetchTitle1)
                         
                     } catch {
                         
