@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		119CC5962D3E5EC00019EFCD /* AsyncLetTut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119CC5952D3E5EC00019EFCD /* AsyncLetTut.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		119CC5952D3E5EC00019EFCD /* AsyncLetTut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncLetTut.swift; sourceTree = "<group>"; };
 		11C276F02D352D5500E99879 /* SwiftConcurrencyTut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftConcurrencyTut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -32,6 +37,7 @@
 		11C276E72D352D5500E99879 = {
 			isa = PBXGroup;
 			children = (
+				119CC5952D3E5EC00019EFCD /* AsyncLetTut.swift */,
 				11C276F22D352D5500E99879 /* SwiftConcurrencyTut */,
 				11C276F12D352D5500E99879 /* Products */,
 			);
@@ -119,6 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				119CC5962D3E5EC00019EFCD /* AsyncLetTut.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

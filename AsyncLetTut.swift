@@ -2,20 +2,24 @@
 //  AsyncLetTut.swift
 //  SwiftConcurrencyTut
 //
-//  Created by Tanmay . on 14/01/25.
+//  Created by Tanmay . on 20/01/25.
 //
 
 import SwiftUI
 
 struct AsyncLetTut: View {
     @State private var images: [UIImage] = []
-    let columns = [GridItem(.flexible())]
-    let url = URL(string: "https://picsum.photos/200")!
+    let url = URL(string: "https://picsum.photos/300")!
+    let columns = [
+        GridItem(.flexible(minimum: 50, maximum: 300)),
+        GridItem(.flexible(minimum: 50, maximum: 300)),
+    ]
+    
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: columns) {
+                LazyVGrid(columns: columns) { 
                     ForEach(images, id: \.self) { image in
                         Image(uiImage: image)
                             .resizable()
@@ -24,54 +28,62 @@ struct AsyncLetTut: View {
                     }
                 }
             }
-            .navigationTitle("Aync Let Tut")
-            .onAppear {
+            .navigationTitle("AsyncLet Tut")
+            .onAppear{
                 Task {
+                    
                     do {
-                        // Using try-await to fetch the images:
+                        // Without using async let:
                         /*
+                         // Image1:
                          let image1 = try await fetchImage()
                          self.images.append(image1)
                          
+                         // Image2:
                          let image2 = try await fetchImage()
                          self.images.append(image2)
                          
+                         // Image3:
                          let image3 = try await fetchImage()
                          self.images.append(image3)
                          
+                         // Image4:
                          let image4 = try await fetchImage()
                          self.images.append(image4)
+                         
                          */
                         
-                        // Using async let to fetch all images at once:
-                        /*
-                         async let fetchImage1 = fetchImage()
-                         async let fetchImage2 = fetchImage()
-                         async let fetchImage3 = fetchImage()
-                         async let fetchImage4 = fetchImage()
-                         let (image1, image2, image3, image4) = await (try fetchImage1, try fetchImage2, try fetchImage3, try fetchImage4)
-                         self.images.append(contentsOf: [image1, image2, image3, image4])
-                         */
-                        
-                        
-                       // We can use Any return value from the Function:
                         async let fetchImage1 = fetchImage()
+                        async let fetchImage2 = fetchImage()
+                        async let fetchImage3 = fetchImage()
+                        async let fetchImage4 = fetchImage()
+                        
+                        // Using await only once instead of using it 4 times as above:
+                        let (image1, image2, image3, image4) = await (try fetchImage1, try fetchImage1, try fetchImage3, try fetchImage4)
+                        self.images.append(contentsOf: [image1, image2, image3, image4])
+                        
+                        async let fetchImage5 = fetchImage()
                         async let fetchTitle1 = fetchTitle()
                         
-                        let (image1, title1) = await (try fetchImage1, fetchTitle1)
-                        
+                        let (image5, title1) = await (try fetchImage5, fetchTitle1)
                         
                     } catch {
                         
                     }
+                    
+                    
                 }
             }
         }
     }
     
+    func fetchTitle() async -> String {
+        return "New Title"
+    }
+    
     func fetchImage() async throws -> UIImage {
         do {
-            let (data, _) = try await  URLSession.shared.data(from: url, delegate: nil)
+            let (data, _) = try await URLSession.shared.data(from: url, delegate: nil)
             if let image = UIImage(data: data) {
                 return image
             } else {
@@ -81,12 +93,6 @@ struct AsyncLetTut: View {
             throw error
         }
     }
-    
-    // Function to fetch title:
-    func fetchTitle() async  -> String {
-        return "New Title"
-    }
-    
     
 }
 
