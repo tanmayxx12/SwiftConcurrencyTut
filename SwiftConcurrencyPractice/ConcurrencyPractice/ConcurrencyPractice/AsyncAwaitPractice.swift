@@ -22,16 +22,13 @@ class AsyncAwaitPracticeDataManager {
     func upload(result: Double) async -> String {
         return "Okay"
     }
-    
-    
+
     func processWeather() async -> String {
         let records = await fetchWeatherData()
         let average = await calculateAverageTemperature(for: records)
         let response = await upload(result: average)
         return "Server response: \(response)"
     }
-     
-    
 }
 
 
