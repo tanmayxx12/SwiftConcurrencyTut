@@ -11,7 +11,7 @@ import SwiftUI
 struct SwiftConcurrencyTutApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            StructClassActorTut()
         }
     }
 }
