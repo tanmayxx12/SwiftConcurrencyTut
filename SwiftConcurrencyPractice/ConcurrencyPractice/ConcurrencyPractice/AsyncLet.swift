@@ -26,7 +26,6 @@ class AsyncLetDataManager {
         async let (messageData, _) = URLSession.shared.data(from: URL(string: "https://hws.dev/user-messages.json")!)
         do {
             let decoder = JSONDecoder()
-            
             let user = try await decoder.decode(User.self, from: userData)
             let messages = try await decoder.decode([Message].self, from: messageData)
             return "User \(user.name) has \(messages.count) message(s)."
@@ -39,6 +38,7 @@ class AsyncLetDataManager {
 // Creating a View Model:
 class AsyncLetViewModel: ObservableObject {
     @Published var returnedResponse: String = ""
+    @Published var returnedMessage: [String] = []
     let manager = AsyncLetDataManager()
     
     func fetchData() {
@@ -70,6 +70,10 @@ struct AsyncLet: View {
                 .font(.headline)
                 .buttonStyle(.borderedProminent)
                 .tint(.blue)
+                
+//                listRowView
+//                    .padding(.top)
+                
             }
         }
         .onAppear {
@@ -82,3 +86,27 @@ struct AsyncLet: View {
 #Preview {
     AsyncLet()
 }
+
+//extension AsyncLet {
+//    var listRowView: some View {
+//        HStack {
+//            Image(systemName: "person.circle.fill")
+//                .resizable()
+//                .frame(width: 45, height: 45)
+//                .foregroundStyle(.black.opacity(0.4))
+//            
+//            VStack(alignment: .leading) {
+//                Text("Name")
+//                    .font(.headline)
+//                    .fontWeight(.bold)
+//                
+//                Text("Message sent by the person above ..........")
+//                    .font(.caption)
+//                    .fontWeight(.semibold)
+//                    
+//            }
+//            
+//            
+//        }
+//    }
+//}
