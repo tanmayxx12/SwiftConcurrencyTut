@@ -42,7 +42,7 @@ struct CryptoNetworkingPractice: View {
                     ForEach(coins) { coin in
                         NavigationLink {
                             VStack {
-                               
+                                Text("You tapped on \(coin.name)")
                             }
                         } label: {
                             HStack(spacing: 10) {
