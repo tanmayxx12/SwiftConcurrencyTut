@@ -92,8 +92,7 @@ struct CryptoNetworkingPracticeVM: View {
                     List{
                         ForEach(viewModel.coins) { coin in
                             Text(coin.name)
-                                .font(.headline)
-                                
+                                .font(.headline)       
                         }
                     }
                     .listStyle(.plain)
